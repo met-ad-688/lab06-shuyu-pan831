@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-1-load-the-dataset" class="level1 unnumbered">
 <h1 class="unnumbered">Step 1: Load the Dataset</h1>
-<div id="cell-3" class="cell" data-execution_count="2">
+<div id="cell-3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
@@ -324,7 +324,7 @@ only showing top 5 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-5" class="cell" data-execution_count="3">
+<div id="cell-5" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the dataset: Remove records where salary is missing or zero.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">"SALARY_FROM"</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_filtered.<span class="bu">filter</span>(col(<span class="st">"SALARY_FROM"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
@@ -400,7 +400,7 @@ only showing top 5 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-9" class="cell">
+<div id="cell-9" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by NAICS2 and compute salary statistics</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>industry_salary_stats <span class="op">=</span> df_filtered.groupBy(<span class="st">"NAICS2"</span>).agg(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    count(<span class="st">"*"</span>).alias(<span class="st">"Job_Postings"</span>),</span>
@@ -420,7 +420,7 @@ only showing top 5 rows
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>fig2.show()</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>fig2.write_image(<span class="st">"output/figure2.svg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>                                                                                                                                                                </code></pre>
+<pre><code>[Stage 70:&gt;                                                         (0 + 1) / 1]                                                                                                                                                                </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>+------+------------+------------------+----------+----------+-------------+
@@ -476,7 +476,7 @@ only showing top 20 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-13" class="cell">
+<div id="cell-13" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert POSTED column to date format</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df_posted <span class="op">=</span> df.withColumn(<span class="st">"POSTED_DATE"</span>, to_date(col(<span class="st">"POSTED"</span>), <span class="st">"M/d/yyyy"</span>))</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the dataset: Remove records where POSTED_DATE is NULL.</span></span>
@@ -549,7 +549,7 @@ only showing top 20 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-17" class="cell">
+<div id="cell-17" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count job titles</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>job_titles <span class="op">=</span> df.groupBy(<span class="st">"TITLE_NAME"</span>).count().orderBy(col(<span class="st">"count"</span>).desc())</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>job_titles.show(truncate<span class="op">=</span><span class="va">False</span>)</span>
@@ -635,7 +635,7 @@ only showing top 20 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-21" class="cell">
+<div id="cell-21" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count job postings by remote type</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>remote_counts <span class="op">=</span> df.groupBy(<span class="st">"REMOTE_TYPE_NAME"</span>).count().orderBy(col(<span class="st">"count"</span>).desc())</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>remote_counts <span class="op">=</span> remote_counts.dropna(subset<span class="op">=</span>[<span class="st">"REMOTE_TYPE_NAME"</span>])</span>
@@ -689,7 +689,7 @@ only showing top 20 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-25" class="cell" data-execution_count="10">
+<div id="cell-25" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the SKILLS column (which is a string) into an array </span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_array <span class="op">=</span> df.withColumn(<span class="st">"SKILLS_ARRAY"</span>, split(col(<span class="st">"SKILLS"</span>), <span class="st">","</span>))</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>df_exploded <span class="op">=</span> df_array.select(<span class="st">"NAICS2_NAME"</span>, explode(col(<span class="st">"SKILLS_ARRAY"</span>)).alias(<span class="st">"SKILL"</span>))</span>
@@ -743,7 +743,7 @@ only showing top 20 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-29" class="cell" data-execution_count="11">
+<div id="cell-29" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df.select(<span class="st">"ONET_NAME"</span>, <span class="st">"SALARY_FROM"</span>) <span class="op">\</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(col(<span class="st">"ONET_NAME"</span>).isNotNull() <span class="op">&amp;</span> col(<span class="st">"SALARY_FROM"</span>).isNotNull() <span class="op">&amp;</span> (col(<span class="st">"SALARY_FROM"</span>) <span class="op">&gt;</span> <span class="dv">0</span>))</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -800,7 +800,7 @@ only showing top 20 rows
 </ul></li>
 <li><strong>Explanation:</strong> Write two sentences about what the graph reveals.</li>
 </ul>
-<div id="cell-33" class="cell" data-execution_count="12">
+<div id="cell-33" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out nulls</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df_soc <span class="op">=</span> df.select(<span class="st">"SOC_2021_2_NAME"</span>, <span class="st">"SOC_2021_3_NAME"</span>) <span class="op">\</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(col(<span class="st">"SOC_2021_2_NAME"</span>).isNotNull() <span class="op">&amp;</span> col(<span class="st">"SOC_2021_3_NAME"</span>).isNotNull())</span>
